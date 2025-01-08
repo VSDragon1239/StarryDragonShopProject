@@ -1,0 +1,133 @@
+{% extends 'base/base_content.html' %}
+{% load static %}
+
+{% block add_css_3 %}
+    <link rel="stylesheet" href="{% static 'css/user_content.css' %}">
+{% endblock %}
+
+{% block cart_content_block %}
+    <h1 class="cart-title">Ваша корзина</h1>
+    {% if items %}
+        <ul class="cart-items">
+            {% for item in items %}
+                <li class="cart-item">
+                    <span class="cart-item-name">{{ item.product.name }}</span>
+                    <span class="cart-item-quantity">{{ item.quantity }} шт.</span>
+                    <span class="cart-item-price">{{ item.product.price }} ₽</span>
+                    <span class="cart-item-total">
+                Итого: {{ item.quantity|floatformat:2|add:item.product.price }} ₽
+            </span>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="cart-summary">
+            <p class="cart-total">Общая стоимость: <span class="cart-total-price">{{ total_price }} ₽</span></p>
+            <a href="{% url 'test' %}" class="checkout-button">Перейти к оформлению</a>
+        </div>
+    {% else %}
+        <p class="cart-empty">Ваша корзина пуста.</p>
+    {% endif %}
+{% endblock %}
+{% block items_content_block_2 %}
+    <div class="content-block-1">
+        <h1 class="cart-title">Ваша корзина</h1>
+        <ul class="cart-items">
+            <!-- Прямое перечисление данных -->
+            <li class="cart-item">
+                <span class="cart-item-name">Товар 1</span>
+                <span class="cart-item-quantity">2 шт.</span>
+                <span class="cart-item-price">500.00 ₽</span>
+                <span class="cart-item-total">Итого: 1000.00 ₽</span>
+            </li>
+            <li class="cart-item">
+                <span class="cart-item-name">Товар 2</span>
+                <span class="cart-item-quantity">1 шт.</span>
+                <span class="cart-item-price">1500.00 ₽</span>
+                <span class="cart-item-total">Итого: 1500.00 ₽</span>
+            </li>
+            <li class="cart-item">
+                <span class="cart-item-name">Товар 3</span>
+                <span class="cart-item-quantity">3 шт.</span>
+                <span class="cart-item-price">300.00 ₽</span>
+                <span class="cart-item-total">Итого: 900.00 ₽</span>
+            </li>
+        </ul>
+        <ul class="cart-items">
+            {% for item in items %}
+                <li class="cart-item">
+                    <span class="cart-item-name">{{ item.name }}</span>
+                    <span class="cart-item-quantity">{{ item.quantity }} шт.</span>
+                    <span class="cart-item-price">{{ item.price }} ₽</span>
+                    <span class="cart-item-total">
+                Итого: {{ item.quantity|floatformat:2|add:item.price }} ₽
+            </span>
+                </li>
+            {% empty %}
+                <!-- Если корзина пуста -->
+                <li class="cart-item-empty">
+                    <p class="cart-empty">Ваша корзина пуста.</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+{% block items_content_block_3 %}
+    <h1 class="cart-title">Ваша корзина</h1>
+    {#            {% if items %}#}
+    <ul class="cart-items">
+        {#                    {% for item in items %}#}
+        <li class="cart-item">
+            <input type="checkbox" class="cart-item-checkbox">
+            <div class="item-image">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            </div>
+            <div class="cart-item-details">
+                <span class="cart-item-name">{{ item.product.name }}</span>
+                <p class="cart-item-info">{{ item.product.description|truncatechars:50 }}</p>
+                <p class="cart-item-delivery-date">Дата доставки: {{ item.delivery_date }}</p>
+            </div>
+            <div class="cart-item-quantity">
+                <button class="quantity-decrease">-</button>
+                <label>
+                    <input type="number" value="{{ item.quantity }}" min="1" class="quantity-input">
+                </label>
+                <button class="quantity-increase">+</button>
+            </div>
+            <div class="cart-item-price">
+                <span class="discount-price">{{ item.product.discount_price }} ₽</span>
+                <span class="original-price">{{ item.product.price }} ₽</span>
+            </div>
+            <div class="item-actions">
+                <button class="delete-item">🗑️</button>
+                <button class="save-for-later">💾</button>
+            </div>
+        </li>
+        {#                    {% endfor %}#}
+    </ul>
+    </div>
+
+{% endblock %}
+
+
+{% block content_block_2 %}
+    <div class="content-block-2">
+        <div class="cart-summary">
+            <p class="cart-total">Общая стоимость: <span class="cart-total-price">3400.00 ₽</span></p>
+            <a href="#" class="checkout-button">Перейти к оформлению</a>
+        </div>
+        <div class="cart-summary">
+            <p class="cart-total">Общая стоимость: <span class="cart-total-price">{{ total_price }} ₽</span></p>
+            <a href="{% url 'test' %}" class="checkout-button">Перейти к оформлению</a>
+            <label class="cart-agreement">
+                <input type="checkbox" checked> Соглашаюсь с правилами пользования торговой площадкой и возврата
+            </label>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block content_block_3 %}
+    <div class="content-block-3">
+    </div>
+{% endblock %}

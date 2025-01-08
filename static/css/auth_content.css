@@ -1,0 +1,98 @@
+.auth-content-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: var(--global-side-background-color-element);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
+/* Общий стиль для контейнера */
+.auth-container {
+    gap: 10px;
+    margin: 10px 10px;
+    padding: 10px;
+    background-color: var(--global-side-background-color-element);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
+/* Стили для каждого блока */
+.auth-block {
+    flex: 1;
+    max-width: 350px;
+    background-color: var(--content-block-1-background-color-element);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Заголовок */
+.auth-title {
+    margin-bottom: 10px;
+    color: var(--global-color-element);
+}
+
+/* Стили для формы */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Кнопка */
+.auth-button {
+    background-color: var(--global-color-element);
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+    background-color: var(--header-color-border-button-hover);
+}
+
+/* Ссылки */
+.auth-link {
+    color: var(--global-color-element);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.auth-link:hover {
+    color: var(--header-color-border-button-hover);
+}
+
+/* Ошибки */
+.error-messages {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Футер */
+.auth-footer {
+    margin-top: 20px;
+    color: #555;
+}

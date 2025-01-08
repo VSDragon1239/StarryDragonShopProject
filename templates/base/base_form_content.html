@@ -1,0 +1,12 @@
+<!-- app/templates/base/base_form_content.html -->
+{% extends 'base/base_content.html' %}
+{% load static %}
+
+{% block add_css_base_form_content %}
+    <link rel="stylesheet" href="{% static 'css/base/base_form_content.css' %}">
+{% endblock %}
+
+{% block auth_content_block %}
+    {% block auth_content_block_1 %}{% endblock %}
+    {% block auth_content_block_2 %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,43 @@
+.content-block-0 {
+    background-color: var(--content-block-1-background-color-element); /* Основной фон блока */
+    border-radius: 10px; /* Скругленные углы */
+    padding: 0; /* Внутренний отступ */
+    text-align: center; /* Центрирование текста */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    /*width: 253px;*/
+    height: auto;
+}
+
+.content-block-1 {
+    background-color: var(--content-block-1-background-color-element); /* Основной фон блока */
+    border-radius: 10px; /* Скругленные углы */
+    padding: 10px; /* Внутренний отступ */
+    text-align: center; /* Центрирование текста */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    /*width: 253px;*/
+    /*min-width: 253px;*/
+}
+
+.content-block-2 {
+    display: flex;
+    background-color: var(--header-block-2-background-color);
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.content-block-3 {
+    display: flex;
+    background-color: var(--header-block-2-background-color);
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 553px;
+    height: 482px;
+    position: sticky; /* Делает блок "липким" */
+    top: 10px; /* Отступ сверху при прилипания */
+    z-index: 10; /* Обеспечивает видимость поверх других элементов */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Добавляем небольшой эффект тени */
+}

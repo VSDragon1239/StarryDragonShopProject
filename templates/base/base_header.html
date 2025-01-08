@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block add_css_base_header %}<link rel="stylesheet" href="{% static 'css/base/base_header.css' %}">{% endblock %}
+
+
+{% block header_block_1 %}
+    <div class="header-block-1">
+        <a class="base-link" href="{% url 'main' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Starry Dragon Logo" />
+            <h1>Starry Dragon <br> 3D-Shop</h1>
+        </a>
+    </div>
+{% endblock %}
+
+{% block header_block_2 %}
+    <div class="header-block-2">
+        <label>
+            <input type="text" placeholder="Поиск по товарам" />
+        </label>
+        <a class="base-link" href="{% url 'search' %}">🔍 Поиск</a>
+    </div>
+{% endblock %}
+{% block header_block_3 %}
+    <div class="header-block-3">
+        <a class="base-link" href="{% url 'login' %}">Войти</a>
+        <a class="base-link" href="{% url 'reg' %}">Зарегистрироваться</a>
+    </div>
+{% endblock %}
+
+
+
+

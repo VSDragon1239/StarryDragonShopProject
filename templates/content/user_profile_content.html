@@ -1,0 +1,45 @@
+{% extends 'base/base_content.html' %}
+{% load static %}
+
+{% block add_css_user_cart_content %}
+    <link rel="stylesheet" href="{% static 'css/content/user_profile_content.css' %}">
+{% endblock %}
+
+{#{% block content_block_1 %}{% endblock %}#}
+
+{% block bar_content_block_1 %}
+<div class="bar_content">
+    <a href="#">Главная</a>
+    <a href="#">Заказы</a>
+    <a href="#">Покупки</a>
+    <a href="#">Избранное</a>
+    <a href="#">Кошелёк</a>
+    <a href="#">Отзывы и вопросы</a>
+    <a href="#">Обращения</a>
+    <a href="#">Ещё разделы</a>
+</div>
+{% endblock %}
+
+
+{% block sidebar_content_block_1 %}
+    <div class="sidebar">
+        <div class="sidebar-links">
+            <img class="sidebar-image" src="{% static 'images/user_data/profile_image_test.jpg' %}" alt="Profile image">
+            <h1 class="sidebar-username">Имя пользователя</h1>
+
+        </div>
+        <h3>Основные операции</h3>
+        <a href="{% url 'user_cart' %}" class="base-link sidebar-category">
+            <img class="link-image" src="{% static 'images/links/finance_job.svg' %}" alt="job">
+            Мои финансовые дела
+        </a>
+        <a href="{% url 'test' %}" class="base-link sidebar-category">
+            <img class="link-image" src="{% static 'images/logo.png' %}" alt="job">
+            Управление аккаунтом
+        </a>
+    </div>
+{% endblock %}
+
+{% block profile_content_block %}
+    <div class="sidebar-profile_content"></div>
+{% endblock %}

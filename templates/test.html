@@ -1,0 +1,35 @@
+{% load static %}
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Django MVVM{% endblock %}</title>
+
+    <!-- Базовые стили -->
+    <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
+
+    <!-- Уникальные стили для каждой страницы -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Django MVVM App</h1>
+        <nav>
+            <a href="{% url 'main' %}">Home</a>
+{#            <a href="{% url 'about' %}">About</a>#}
+{#            <a href="{% url 'products' %}">Products</a>#}
+{#            <a href="{% url 'contact' %}">Contact</a>#}
+{#            <a href="{% url 'faq' %}">FAQ</a>#}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Django MVVM App</p>
+    </footer>
+</body>
+</html>

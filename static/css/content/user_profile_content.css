@@ -1,0 +1,119 @@
+.sidebar {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--header-block-2-background-color);
+}
+
+.sidebar-auth {
+    /*flex: 1;*/
+    background-color: var(--header-color-button);
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: var(--header-color-button);
+    border-radius: 10px;
+    width: 300px;
+}
+
+.sidebar-image {
+    background-color: rgb(18 18 18);
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    padding: 4px;
+}
+
+.sidebar-register {
+    /*flex: 0;*/
+    background-color: var(--header-color-button);
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-auth:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-auth:active {
+    background-color: var(--header-color-button-active);
+}
+
+.sidebar-register:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-register:active {
+    background-color: var(--header-color-button-active);
+}
+
+/* Category link styling */
+.sidebar-category {
+    background-color: var(header-color-border-button);
+    color: black;
+    padding: 15px;
+    margin: 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 24px;
+    letter-spacing: 8px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.sidebar-category:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-category:active {
+    background-color: var(--header-color-button-active);
+}
+
+.bar_content {
+    display: flex;
+    justify-content: space-between;
+    background-color: #d3d3d3; /* Цвет фона блока */
+    padding: 10px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругленные углы */
+}
+
+.bar_content a {
+    color: black; /* Цвет текста */
+    font-size: 24px; /* Размер шрифта */
+    padding: 10px 20px; /* Отступы внутри ссылки */
+    transition: color 0.3s ease; /* Эффект при наведении */
+}
+
+.bar_content a:hover {
+    color: #555; /* Цвет при наведении */
+}

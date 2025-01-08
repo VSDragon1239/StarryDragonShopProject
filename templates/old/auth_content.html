@@ -1,0 +1,54 @@
+<!-- app/templates/index.html -->
+{% extends 'old/base_content.html' %}
+{% load static %}
+
+{% block add_css_4 %}
+    <link rel="stylesheet" href="{% static 'css/auth_content.css' %}">
+{% endblock %}
+
+{% block auth_content_block_1 %}
+    <div class="auth-container">
+        <div class="auth-block">
+            <h1 class="auth-title">Вход</h1>
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="auth-button">Войти</button>
+            </form>
+            <p class="auth-footer">
+                Нет аккаунта? <a href="{% url 'reg' %}" class="auth-link">Зарегистрироваться</a>
+            </p>
+            {% if form.errors %}
+                <div class="error-messages">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block auth_content_block_2 %}
+    <div class="auth-container">
+        <div class="auth-block">
+            <h1 class="auth-title">Регистрация</h1>
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="auth-button">Зарегистрироваться</button>
+            </form>
+            <p class="auth-footer">
+                Уже есть аккаунт? <a href="{% url 'login' %}" class="auth-link">Войти</a>
+            </p>
+            {% if form.errors %}
+                <div class="error-messages">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

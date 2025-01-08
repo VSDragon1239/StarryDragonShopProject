@@ -1,0 +1,50 @@
+<!-- app/templates/index.html -->
+{% extends 'base/base_items_and_sidebar_content.html' %}
+{% load static %}
+
+{% block add_css_filter_bar_content %}
+    <link rel="stylesheet" href="{% static 'css/base/filter_bar_content.css' %}">
+{% endblock %}
+
+{% block filter_items_content_block %}
+    <div class="filter-bar">
+        {% block filter_content_block_1 %}
+            <a href="#" class="filter-btn">
+                <span class="icon">⚙️</span>
+                По популярности
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">🔍</span>
+                Все фильтры
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">📂</span>
+                Категория
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">💰</span>
+                Цена, ₽
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">⏳</span>
+                Срок доставки
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">🏷️</span>
+                Бренд
+            </a>
+            <a href="#" class="filter-btn active">
+                <span class="icon">✅</span>
+                Оригинал
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">🛠️</span>
+                Материал изделия
+            </a>
+            <a href="#" class="filter-btn">
+                <span class="icon">🎨</span>
+                Тематика
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}

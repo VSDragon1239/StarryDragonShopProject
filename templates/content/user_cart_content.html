@@ -1,0 +1,64 @@
+{% extends 'base/base_content.html' %}
+{% load static %}
+
+{% block add_css_user_profile_content %}
+    <link rel="stylesheet" href="{% static 'css/content/user_cart_content.css' %}">
+{% endblock %}
+
+{% block content_block_1 %}{% endblock %}
+
+{% block user_cart_content_block %}
+    <div class="user_cart_content">
+        <h1 class="cart-item-back-color cart-title">Ваша корзина</h1>
+        {#            {% if items %}#}
+        <ul class="cart-items">
+            {% for list in list_test %}
+                <li class="cart-item-back-color-black cart-item">
+                    <label class="cart-item-back-color">
+                        <input type="checkbox" class="cart-item-checkbox">
+                    </label>
+                    <a href="#" class="cart-item-link">
+                        <div class="item-image">
+                            <img src="{% static 'images/items/item_test.png' %}" alt="изобра{{ item.product.name }}">
+                        </div>
+                        <div class="cart-item-details">
+                            <span class="cart-item-name" style="pointer-events: none;">Название {{ item.product.name }}</span>
+                            <p class="cart-item-info" style="pointer-events: none;">Информация о
+                                товаре: {{ item.product.description|truncatechars:50 }}</p>
+                            <p class="cart-item-delivery-date" style="pointer-events: none;">Предположительная дата
+                                доставки: {{ item.delivery_date }}</p>
+                        </div>
+                    </a>
+                    <div class="cart-item-back-color cart-item-price">
+                        <span class="price original-price">8 598 {{ item.product.price }} ₽</span>
+                        <span class="price discount-price">3 999 {{ item.product.discount_price }} ₽</span>
+                    </div>
+                    <div class="cart-item-back-color cart-item-quantity">
+                        <a class="base-link quantity-button quantity-decrease">-</a>
+                        <label class="cart-item-back-color">
+                            <input type="number" value="{{ item.quantity }}" min="1" class="quantity-input">
+                        </label>
+                        <a href="#" class="base-link quantity-button quantity-increase">+</a>
+                    </div>
+                    <div class="cart-item-back-color item-actions">
+                        <a href="{% url 'test' %}" class="base-link delete-item">🗑️</a>
+                        <a href="{% url 'test' %}" class="base-link save-for-later">💾</a>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+{% endblock %}
+
+{% block sidebar_content_block_2 %}
+    <div class="sidebar-content-block-2">
+        <div class="cart-summary">
+            <p class="cart-total">Общая стоимость: 0<span class="cart-total-price">{{ total_price }} ₽</span></p>
+            <a href="{% url 'test' %}" class="checkout-button">Перейти к оформлению</a><br>
+            <label class="cart-agreement">
+                <input type="checkbox" checked> Соглашаюсь с правилами пользования торговой площадкой и возврата
+            </label>
+        </div>
+    </div>
+{% endblock %}

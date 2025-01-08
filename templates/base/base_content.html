@@ -1,0 +1,36 @@
+{% extends 'base/base_header.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block add_css_base_content %}
+    <link rel="stylesheet" href="{% static 'css/base/base_content.css' %}">
+{% endblock %}
+
+{% block content_block_0 %}
+    <div class="content-block-0">
+        {% block bar_content_block_1 %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block content_block_1 %}
+    <div class="content-block-1">
+        {% block sidebar_content_block_1 %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block content_block_2 %}
+    <div class="content-block-2">
+        {% block filter_items_content_block %}{% endblock %}
+        {% block items_content_block %}{% endblock %}
+        {% block auth_content_block %}{% endblock %}
+        {% block profile_content_block %}{% endblock %}
+        {% block user_cart_content_block %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block content_block_3 %}
+    <div class="content-block-3">
+        {% block sidebar_content_block_2 %}{% endblock %}
+    </div>
+{% endblock %}

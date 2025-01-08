@@ -1,0 +1,15 @@
+<!-- app/templates/index.html -->
+{% extends 'base/base_sidebar_content.html' %}
+{% load static %}
+
+{% block add_css_items_content %}
+    <link rel="stylesheet" href="{% static 'css/base/../../static/css/content/items_content.css' %}">
+{% endblock %}
+
+{% block items_content_block %}
+    <div class="content-item-grid">
+        {% block items_content_block_1 %}{% endblock %}
+        {% block items_content_block_2 %}{% endblock %}
+        {% block items_content_block_3 %}{% endblock %}
+    </div>
+{% endblock %}

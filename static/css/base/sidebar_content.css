@@ -1,0 +1,101 @@
+.sidebar {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--cart-item-back-color-black);
+    height: 64px;
+}
+
+/* Individual link styling */
+.sidebar-auth {
+    position: relative;
+    /*flex: 1;*/
+    display: flex;
+    background-color: var(--header-color-button);
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 44px;
+
+}
+
+.notification {
+    position: absolute; /* Абсолютное позиционирование */
+    top: -10px; /* Верхний край родительского блока */
+    right: -10px; /* Правый край родительского блока */
+    background-color: #68fffa; /* Цвет фона для акцента */
+    color: #000000; /* Цвет текста */
+    font-size: 18px; /* Размер текста */
+    padding: 6px; /* Внутренние отступы */
+    border-radius: 50%; /* Закруглённая форма */
+    min-width: 20px; /* Минимальная ширина для круглой формы */
+    text-align: center; /* Выравнивание текста по центру */
+    line-height: 1; /* Высота строки */
+}
+
+.sidebar-register {
+    /*flex: 0;*/
+    background-color: var(--header-color-button);
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 44px;
+    height: 44px;
+}
+
+.sidebar-auth:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-auth:active {
+    background-color: var(--header-color-button-active);
+}
+
+.sidebar-register:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-register:active {
+    background-color: var(--header-color-button-active);
+}
+
+/* Category link styling */
+.sidebar-category {
+    background-color: var(--backgroundcolor-base-link);
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+    margin: 0;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-category:hover {
+    background-color: var(--header-color-button-hover);
+    transform: scale(1.05);
+}
+
+.sidebar-category:active {
+    background-color: var(--header-color-button-active);
+}

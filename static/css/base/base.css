@@ -1,0 +1,55 @@
+/* /static/css/base.css */
+
+body {
+    font-family: "Jura", serif;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--global-background-color-element);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 14px;
+    padding: 5px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: var(--header-background-color);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 10px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 800px;
+    gap: 10px; /* Отступы между блоками */
+    padding: 0; /* Внутренние отступы */
+    background-color: var(--global-side-background-color-element); /* Светлый фон */
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для визуального выделения */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.link-image {
+    width: 48px;
+    height: 48px;
+    margin-right: 32px;
+}

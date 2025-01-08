@@ -1,0 +1,324 @@
+.user_cart_content {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--content-block-1-background-color-element);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /*margin: 20px auto;*/
+    /*width: 812px;*/
+}
+
+.sidebar-content-block-2 {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--content-block-1-background-color-element);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Заголовок корзины */
+.cart-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--global-color-element);
+}
+
+/* Список товаров */
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    text-align: left;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    align-items: stretch;
+    border-bottom: 1px solid #757575;
+    padding: 10px 0;
+    gap: 10px;
+    color: #333;
+    height: 150px;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Название, количество, цена и итого */
+.cart-item-name {
+    flex: 2;
+    font-weight: bold;
+}
+
+.cart-item-quantity {
+    flex: 2;
+    text-align: center;
+    /*width: 100px;*/
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-item-price,
+.cart-item-total {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    /*width: 300px;*/
+    align-items: center;
+}
+.price {
+    font-size: 24px;
+    padding: 10px 0;
+}
+
+/* Общая стоимость */
+.cart-summary {
+    margin-top: 20px;
+}
+
+.cart-total {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cart-total-price {
+    color: var(--global-color-element);
+}
+
+/* Кнопка оформления */
+.checkout-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: var(--backgroundcolor-base-link-active);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.checkout-button:hover {
+    background-color: var(--header-color-border-button-hover);
+}
+
+.quantity-input {
+    max-width: 128px;
+    text-align: center; /* Центрирование текста по горизонтали */
+    vertical-align: middle; /* Центрирование текста по вертикали */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 6px; /* Закругленные углы */
+    font-weight: bold; /* Жирный текст */
+    color: #333; /* Цвет текста */
+    background-color: #fff; /* Фон */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Внутренняя тень */
+    appearance: none; /* Убираем стандартный вид */
+}
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.quantity-input:focus {
+    outline: none; /* Убираем стандартный outline */
+    border-color: var(--global-color-element); /* Цвет рамки при фокусе */
+    box-shadow: 0 0 5px rgba(128, 0, 255, 0.3); /* Светящийся эффект */
+}
+
+.quantity-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px; /* Ширина кнопки */
+    height: 24px; /* Высота кнопки */
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/* Пустая корзина */
+.cart-empty {
+    color: #999;
+    margin-top: 20px;
+}
+
+.item-actions {
+    gap: 10px;
+    padding: 10px;
+}
+
+.delete-item {
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.save-for-later {
+    padding: 5px;
+    margin: 10px 0;
+}
+
+/* Стили для чекбокса */
+.cart-item-checkbox {
+    width: 20px;
+    height: 20px;
+    appearance: none; /* Убираем стандартный стиль */
+    border: 2px solid #ccc; /* Граница чекбокса */
+    border-radius: 4px; /* Закругленные углы */
+    background-color: #fff; /* Белый фон */
+    cursor: crosshair; /* Курсор "рука" */
+    transition: all 0.2s ease-in-out;
+    display: inline-block; /* Для выравнивания */
+    position: relative;
+}
+
+/* Состояние при наведении */
+.cart-item-checkbox:hover {
+    border-color: var(--global-color-element); /* Цвет при наведении */
+    background-color: #f9f9f9;
+}
+
+/* Состояние "выбрано" */
+.cart-item-checkbox:checked {
+    background-color: var(--global-color-element); /* Основной цвет фона при выборе */
+    border-color: var(--global-color-element); /* Цвет рамки при выборе */
+    color: #fff;
+}
+
+/* Отметка "галочка" */
+.cart-item-checkbox:checked::before {
+    content: '✔'; /* Символ галочки */
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cart-item-details {
+    flex: 4;
+    /*width: 300px;*/
+}
+
+.cart-item-details:hover {
+    color: var(--header-color-button);
+    cursor: crosshair;
+}
+
+.item-image {
+    width: 132px;
+    height: 132px;
+    display: inline-block;
+    position: relative;
+    background-color: #f9f9f9; /* Цвет фона */
+    border-radius: 12px; /* Закругление углов контейнера */
+    overflow: hidden; /* Чтобы изображение не выходило за рамки */
+    padding: 0;
+}
+
+.item-image img {
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    mask-image:
+        linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image:
+        linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+    mask-composite: intersect;
+    border-radius: 20px; /* Закругление углов контейнера */
+    -webkit-mask-composite: destination-in;
+    /*filter: blur(10px); !* Интенсивность размытия краев *!*/
+}
+
+
+.cart-item-back-color {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: var(--header-background-color);
+}
+
+.cart-item-back-color-black {
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: var(--cart-item-back-color-black);
+}
+
+/* Стили для ссылки вокруг элемента */
+.cart-item-link {
+    display: flex;
+    gap: 10px;
+    background-color: var(--header-color-button); /* Основной цвет фона */
+    padding: 10px; /* Внутренний отступ */
+    color: inherit; /* Сохраняем текущий цвет текста */
+    text-decoration: none; /* Убираем подчеркивание текста */
+    flex: 4; /* Растяжение на весь доступный блок */
+    /*border-radius: 8px; !* Закругленные углы *!*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для объема */
+    transition: all 0.3s ease-in-out; /* Плавные переходы */
+    align-items: center; /* Вертикальное выравнивание содержимого */
+}
+
+/* Эффект при наведении */
+.cart-item-link:hover {
+    background-color: var(--header-color-border-button-hover); /* Цвет при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Более заметная тень */
+    transform: translateY(-2px); /* Легкий подъем кнопки */
+    text-decoration: none; /* Убираем подчеркивание, если появилось */
+}
+
+/* Эффект нажатия */
+.cart-item-link:active {
+    background-color: var(--header-color-button-active); /* Цвет кнопки при нажатии */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Внутренняя тень для эффекта нажатия */
+    transform: translateY(0); /* Убираем подъем */
+}
+
+/* Дополнительный стиль для текста внутри ссылки */
+.cart-item-link span {
+    font-weight: bold; /* Жирный текст */
+    font-size: 16px; /* Размер шрифта */
+    /*color: #fff; !* Белый текст *!*/
+    text-align: left;
+}
+
+/* Дополнительные элементы внутри */
+/*.cart-item-link .item-image {*/
+/*    border-radius: 6px; !* Закругление для изображения *!*/
+/*    overflow: hidden;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); !* Легкая тень *!*/
+/*}*/
+
+/*.cart-item-link .cart-item-details {*/
+/*    flex: 1;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 6px;*/
+/*}*/
+
+.cart-item-link .cart-item-name {
+    font-size: 18px;
+    /*color: var(--global-color-element); !* Основной цвет текста *!*/
+    font-weight: bold;
+    /*padding: 10px;*/
+}
+
+.cart-item-link .cart-item-info {
+    font-size: 14px;
+    /*color: #757575; !* Дополнительный цвет для описания *!*/
+}

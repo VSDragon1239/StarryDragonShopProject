@@ -1,0 +1,102 @@
+/* Общий стиль для страницы */
+
+@font-face {
+    font-family: "Jura";
+    src: url("../fonts/Jura.ttf");
+}
+
+:root {
+    --global-color-element: rgb(78, 78, 78);
+    --global-background-color-element: #f6f6f6;
+    --content-block-1-background-color-element: #ffffff;
+    --content-block-2-background-color-element: #ffffff;
+    --global-side-background-color-element: rgba(195, 195, 195, 0.3);
+
+
+    --header-background-color: rgb(238, 238, 238);
+    --header-block-2-background-color: rgb(250, 250, 250);
+    --header-color-button: rgb(220, 219, 219);;
+    --header-color-border-button: rgb(120, 119, 119);
+
+    --header-color-button-hover: rgb(120, 119, 119);
+    --header-color-border-button-hover: rgb(83, 83, 83);
+
+    --header-color-button-active: rgb(150, 150, 150);
+    --header-color-border-button-active: rgb(158, 158, 158);
+
+
+    --footer-background-color: #333;
+
+    --color-base-link: rgb(0, 0, 0);
+    --backgroundcolor-base-link: rgb(220, 219, 219);
+    --backgroundcolor-base-link-hover: rgb(180, 180, 180);
+    --backgroundcolor-base-link-active: rgb(150, 150, 150);
+    --cart-item-back-color-black: rgb(186, 186, 186);
+
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Заголовок */
+h1 {
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 3px 10px;
+    font-size: 24px;
+}
+
+h3 {
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0;
+    text-align: left;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+/* Ссылки */
+a {
+    color: #0066cc;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+input {
+    font-family: "Jura", serif;
+    border: 0  #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 24px;
+}
+
+button {
+    font-family: "Jura", serif;
+
+}
+
+img {
+    /*padding: 10px;*/
+}
+
+ul {
+    padding: 0; /* Убираем отступы списка */
+    margin: 0;
+    list-style: none; /* Убираем стандартные маркеры */
+}
+
+li {
+    margin-bottom: 10px; /* Расстояние между элементами */
+}
+
+li:last-child {
+    margin-bottom: 0;
+}

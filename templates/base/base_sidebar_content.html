@@ -1,0 +1,30 @@
+<!-- app/templates/index.html -->
+{% extends 'base/base_content.html' %}
+{% load static %}
+
+{% block add_css_sidebar_content %}
+    <link rel="stylesheet" href="{% static 'css/base/sidebar_content.css' %}">
+{% endblock %}
+
+{% block sidebar_content_block_1 %}
+    <div class="sidebar">
+        <div class="sidebar-links">
+            {% if user %}
+                <a class="sidebar-auth" href="{% url 'user_profile' %}">
+                    <img src="{% static 'images/links/user_profile.svg' %}" alt="user_profile">
+                </a>
+                <a class="sidebar-auth" href="{% url 'user_cart' %}">
+                    <div class="notification">{{ request.session.cart_count|default:0 }}</div>
+                    <img src="{% static 'images/links/user_cart.svg' %}" alt="user_cart">
+                </a>
+                <a class="sidebar-auth" href="{% url 'user_outlog' %}">
+                    <img src="{% static 'images/links/user_logout.svg' %}" alt="user_outlog">
+                </a>
+            {% else %}
+                <a class="sidebar-auth" href="{% url 'login' %}">🔑 Войти</a>
+                <a class="sidebar-register" href="{% url 'reg' %}">👤</a>
+            {% endif %}
+        </div>
+        <a href="{% url 'test' %}" class="base-link sidebar-category">🔥 Выбрать Категорию</a>
+    </div>
+{% endblock %}
