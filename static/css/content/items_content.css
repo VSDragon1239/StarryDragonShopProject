@@ -165,6 +165,7 @@
     background-color: var(--header-color-button);
     border-radius: 10px;
     padding: 10px;
+    flex-direction: column;
 }
 
 .product-download a {

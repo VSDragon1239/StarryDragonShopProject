@@ -79,7 +79,26 @@
                         <a href="{{ product.model_files.url }}" download>Скачать файл модели</a>
                     {% else %}
                         <p>Чтобы использовать, необходимо его приобрести</p>
-                        <a href="{{ product.model_files.url }}" download>Скачать файл модели</a>
+                        {% if not request.GET.added_product %}
+                            <br>
+                            <form class="product-form" method="post" action="{% url 'add_user_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="base-link btn-add-to-cart">Добавить в корзину</button>
+                            </form>
+
+                        {% else %}
+                            <br>
+                            <a class="base-link auth-link cart-item-link" href="{% url 'user_cart' %}">Перейти в
+                                корзину</a>
+                            <br>
+                            <form class="product-form" method="post" action="{% url 'add_user_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="base-link btn-add-to-cart">Добавить ещё</button>
+                            </form>
+                            <br>
+                            <p>Продукт с ID {{ request.GET.added_product }} был добавлен в корзину.
+                                Количество: {{ request.GET.quantity }}</p>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>

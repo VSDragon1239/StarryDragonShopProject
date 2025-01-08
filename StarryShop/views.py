@@ -1,11 +1,13 @@
 from lib2to3.fixes.fix_input import context
 
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.views.generic import TemplateView
 
 from StarryShop.ViewModels.CategoriesViewModelModule import CategoriesViewModel
 from StarryShop.ViewModels.ProductsViewModelModule import ProductsViewModel
+from StarryShop.models import Cart, CartItem, Product
 
 
 class User:
@@ -83,6 +85,8 @@ class ItemDetailsView(TemplateView):
         self.initViewModel()
         pk = kwargs.get('pk')  # Получаем значение pk
         pk2 = kwargs.get('pk2')  # Получаем значение pk2
+        added_product = kwargs.get('added_product')  # Получаем значение pk2
+        quantity = kwargs.get('quantity')  # Получаем значение pk2
         context = super().get_context_data(**kwargs)
         context['user'] = UserTest.isAuthenticated
         context["product"] = self.product
@@ -107,6 +111,99 @@ class ItemSearchView(TemplateView):
         context['user'] = UserTest.isAuthenticated
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
+
+
+class UserCartView(TemplateView):
+    template_name = "pages/user_cart.html"
+
+    def get(self, request, *args, **kwargs):
+        self.cart = self.get_cart(request)
+        self.items = self.cart.items.all()
+        # print(self.items[0], self.items[0].product.image)
+        self.total_price = sum(item.product.price * item.quantity for item in self.items)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = self.items
+        context['total_price'] = self.total_price
+        return context
+
+    def get_cart(self, request):
+        """Получение текущей корзины"""
+        if request.user.is_authenticated:
+            cart, _ = Cart.objects.get_or_create(user=request.user)
+        else:
+            session_key = request.session.session_key
+            if not session_key:
+                request.session.create()
+            cart, _ = Cart.objects.get_or_create(session_key=request.session.session_key)
+        return cart
+
+
+class AddToCartView(TemplateView):
+    def post(self, request, *args, **kwargs):
+        product_id = kwargs.get('product_id')
+        cart = UserCartView().get_cart(request)
+        product = get_object_or_404(Product, id=product_id)
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        if not created:
+            cart_item.quantity += 1
+        cart_item.save()
+        referer_url = request.META.get('HTTP_REFERER', '/')
+
+        # Проверяем, является ли запрос AJAX
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'status': 'success', 'redirect_url': referer_url})
+
+        # Добавляем параметр в путь
+        redirect_url = f"{referer_url}?added_product={product.id}&quantity={cart_item.quantity}"
+        return redirect(redirect_url)
+
+
+class UpdateCartItemView(TemplateView):
+    def post(self, request, *args, **kwargs):
+        item_id = kwargs.get('item_id')
+        cart = UserCartView().get_cart(request)
+        item = get_object_or_404(CartItem, id=item_id, cart=cart)
+        quantity = int(request.POST.get('quantity', 1))
+        if quantity > 0:
+            item.quantity = quantity
+            item.save()
+        else:
+            item.delete()
+        return JsonResponse({'status': 'success', 'message': 'Количество обновлено'})
+
+
+class RemoveFromCartView(TemplateView):
+    def post(self, request, *args, **kwargs):
+        item_id = kwargs.get('item_id')
+        cart = UserCartView().get_cart(request)
+        item = get_object_or_404(CartItem, id=item_id, cart=cart)
+        item.delete()
+        # Получаем URL предыдущей страницы
+        # Получаем URL предыдущей страницы
+        referer_url = request.META.get('HTTP_REFERER', '/')
+
+        # Проверяем, является ли запрос AJAX
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'status': 'success', 'redirect_url': referer_url})
+
+        return redirect(referer_url)
+
+
+class MergeGuestCartView(TemplateView):
+    """Объединение гостевой корзины с пользовательской при входе"""
+    def merge_carts(self, user, session_key):
+        guest_cart = Cart.objects.filter(session_key=session_key).first()
+        if guest_cart:
+            user_cart, _ = Cart.objects.get_or_create(user=user)
+            for item in guest_cart.items.all():
+                user_item, created = CartItem.objects.get_or_create(cart=user_cart, product=item.product)
+                if not created:
+                    user_item.quantity += item.quantity
+                user_item.save()
+            guest_cart.delete()
 
 
 class AuthLoginView(TemplateView):
@@ -135,17 +232,17 @@ class AuthReginView(TemplateView):
         return context
 
 
-class UserCartView(TemplateView):
-    template_name = "pages/user_cart.html"
-
-    def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
-        context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        return context
+# class UserCartView(TemplateView):
+#     template_name = "pages/user_cart.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         return super().get(request, *args, **kwargs)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['user'] = UserTest.isAuthenticated
+#         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#         return context
 
 
 class UserProfileView(TemplateView):

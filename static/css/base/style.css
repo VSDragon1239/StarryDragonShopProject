@@ -79,9 +79,32 @@ input {
 }
 
 button {
-    font-family: "Jura", serif;
-
+    font-family: "Jura", serif; /* Устанавливаем шрифт */
+    font-size: 16px; /* Размер текста */
+    padding: 10px 20px; /* Внутренние отступы */
+    border: 2px solid transparent; /* Границы кнопки */
+    border-radius: 5px; /* Скругленные углы */
+    background-color: inherit; /* Наследуем фон */
+    color: inherit; /* Наследуем цвет текста */
+    cursor: pointer; /* Указатель мыши при наведении */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Плавные эффекты */
 }
+
+button:hover {
+    transform: scale(1.05); /* Увеличиваем кнопку при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Легкая тень при наведении */
+}
+
+button:active {
+    transform: scale(0.98); /* Легкое "вдавливание" при нажатии */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень становится мягче */
+}
+
+button:focus {
+    outline: none; /* Убираем стандартный фокус */
+    border: 2px solid rgba(0, 0, 0, 0.5); /* Добавляем легкую границу при фокусе */
+}
+
 
 img {
     /*padding: 10px;*/

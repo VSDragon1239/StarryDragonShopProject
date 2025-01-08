@@ -14,7 +14,7 @@
                     <img src="{% static 'images/links/user_profile.svg' %}" alt="user_profile">
                 </a>
                 <a class="sidebar-auth" href="{% url 'user_cart' %}">
-                    <div class="notification">{{ request.session.cart_count|default:0 }}</div>
+                    <div class="notification">{% block notific %}{% endblock %}</div>
                     <img src="{% static 'images/links/user_cart.svg' %}" alt="user_cart">
                 </a>
                 <a class="sidebar-auth" href="{% url 'user_outlog' %}">
