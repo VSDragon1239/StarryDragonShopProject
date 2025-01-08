@@ -25,8 +25,7 @@
     <div class="sidebar">
         <div class="sidebar-links">
             <img class="sidebar-image" src="{% static 'images/user_data/profile_image_test.jpg' %}" alt="Profile image">
-            <h1 class="sidebar-username">Имя пользователя</h1>
-
+                <h1 class="sidebar-username">{{ user.username }}</h1>
         </div>
         <h3>Основные операции</h3>
         <a href="{% url 'user_cart' %}" class="base-link sidebar-category">
@@ -41,5 +40,11 @@
 {% endblock %}
 
 {% block profile_content_block %}
-    <div class="sidebar-profile_content"></div>
+    <div class="sidebar-profile_content">
+        {% block profile_orders_content_block %}
+            
+        {% endblock %}
+        {% block profile_content_block_2 %}{% endblock %}
+        {% block profile_content_block_3 %}{% endblock %}
+    </div>
 {% endblock %}

@@ -1,21 +1,26 @@
 from lib2to3.fixes.fix_input import context
 
+from django.contrib.auth.models import AnonymousUser
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.contrib.auth import login, authenticate, logout
 from django.views.generic import TemplateView
+from .forms import CustomUserRegistrationForm, CustomLoginForm
+
 
 from StarryShop.ViewModels.CategoriesViewModelModule import CategoriesViewModel
 from StarryShop.ViewModels.ProductsViewModelModule import ProductsViewModel
 from StarryShop.models import Cart, CartItem, Product
 
 
-class User:
-    def isAuthenticated(self):
-        return True
-
-
-UserTest = User()
+# class User:
+#     isAuth = False
+#
+#     def isAuthenticated(self):
+#         return self.isAuth
+#
+#
+# UserTest = User()
 
 
 # Create your views here.
@@ -42,7 +47,11 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         self.initViewModel()
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user
+        if user.username == '':
+            context['user'] = False
+        else:
+            context['user'] = user
         context["categories"] = self.categories
         context["products"] = self.products
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -88,7 +97,11 @@ class ItemDetailsView(TemplateView):
         added_product = kwargs.get('added_product')  # Получаем значение pk2
         quantity = kwargs.get('quantity')  # Получаем значение pk2
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user
+        if user.username == 'AnonymousUser':
+            context['user'] = False
+        else:
+            context['user'] = user
         context["product"] = self.product
         context["pk"] = pk
         context["pk2"] = pk2
@@ -108,7 +121,11 @@ class ItemSearchView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user
+        if user.username == '':
+            context['user'] = False
+        else:
+            context['user'] = user
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
 
@@ -182,7 +199,6 @@ class RemoveFromCartView(TemplateView):
         item = get_object_or_404(CartItem, id=item_id, cart=cart)
         item.delete()
         # Получаем URL предыдущей страницы
-        # Получаем URL предыдущей страницы
         referer_url = request.META.get('HTTP_REFERER', '/')
 
         # Проверяем, является ли запрос AJAX
@@ -214,22 +230,52 @@ class AuthLoginView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user
+        if user.username == '':
+            context['user'] = False
+        else:
+            context['user'] = user
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
+
+    def post(self, request):
+        form = CustomLoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('main')  # Перенаправление на главную страницу
+            else:
+                form.add_error(None, 'Неверное имя пользователя или пароль')
+        return render(request, self.template_name, {'form': form})
 
 
 class AuthReginView(TemplateView):
     template_name = "pages/auth_registration.html"
 
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        form = CustomUserRegistrationForm()
+        return render(request, self.template_name, {'form': form})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user
+        if user.username == '':
+            context['user'] = False
+        else:
+            context['user'] = user
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
+
+    def post(self, request):
+        form = CustomUserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Автоматический вход после регистрации
+            return redirect('main')  # Перенаправление на главную страницу
+        return render(request, self.template_name, {'form': form})
 
 
 # class UserCartView(TemplateView):
@@ -249,11 +295,19 @@ class UserProfileView(TemplateView):
     template_name = "pages/user_profile.html"
 
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        user = self.request.user  # Текущий пользователь
+        if user.username == '':
+            print(user)
+        else:
+            return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
+        user = self.request.user  # Текущий пользователь
+        if user.username == '':
+            context['user'] = False
+        else:
+            context['user'] = user
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
 
@@ -262,9 +316,10 @@ class UserOutlogView(TemplateView):
     template_name = "pages/user_outlog.html"
 
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        logout(request)
+        return redirect('main')  # Перенаправление после выхода
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = UserTest.isAuthenticated
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['user'] = UserTest.isAuthenticated
+    #     return context
