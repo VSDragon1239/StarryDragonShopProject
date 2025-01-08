@@ -13,7 +13,7 @@ class ProductsViewModel:
             self.products = Product.objects.all()
         else:
             # Фильтрация по полю `category_id`
-            if self.filter_type == 'category_id' and filter_array:
+            if self.filter_type == 'id' and filter_array:
                 self.products = Product.objects.filter(category_id=int(filter_array))
             else:
                 self.products = Product.objects.all()

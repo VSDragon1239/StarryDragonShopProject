@@ -7,50 +7,84 @@
 {% endblock %}
 
 {% block items_content_block_1 %}
-        {% for product in products %}
-            <a href="{% url 'product' product.category.id product.id %}" class="product-item">
-                <div class="image-placeholder">
-                    {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-{#                        <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">#}
-                    {% else %}
-                        <p>Нет изображения</p>
-                    {% endif %}
+    {% for product in products %}
+        <a href="{% url 'product' product.category.id product.id %}" class="product-item">
+            <div class="image-placeholder">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {#                        <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">#}
+                {% else %}
+                    <p>Нет изображения</p>
+                {% endif %}
+            </div>
+            <div class="product-details">
+                <div class="product-meta">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <p class="product-price">Цена: {{ product.price }} ₽</p>
                 </div>
-                <div class="product-details">
-                    <div class="product-meta">
-                        <h3 class="product-title">{{ product.name }}</h3>
-                        <p class="product-price">Цена: {{ product.price }} ₽</p>
-                    </div>
-                    <div class="product-meta">
-                        <span class="comments">💬 {{ product.reviews.count }}</span>
-                        <span class="likes">👍 {{ product.rating|floatformat:1 }}</span>
-                        <span class="seller">👤 Автор</span>
-                    </div>
+                <div class="product-meta">
+                    <span class="comments">💬 {{ product.reviews.count }}</span>
+                    <span class="likes">👍 {{ product.rating|floatformat:1 }}</span>
+                    <span class="seller">👤 Автор</span>
                 </div>
-            </a>
-        {% endfor %}
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}
 
 
 {% block items_content_block_2 %}
-        {% for i in list_test %}
-            <a href="{% url 'test' %}" class="product-item">
-                <div class="image-placeholder">
-                    <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">
-{#                    <img src="" alt="Нейм">#}
+    {% for i in list_test %}
+        <a href="{% url 'test' %}" class="product-item">
+            <div class="image-placeholder">
+                <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">
+                {#                    <img src="" alt="Нейм">#}
+            </div>
+            <div class="product-details">
+                <div class="product-meta">
+                    <h3 class="product-title">Название</h3>
+                    <p class="product-price">Цена: 0 ₽</p>
                 </div>
-                <div class="product-details">
-                    <div class="product-meta">
-                        <h3 class="product-title">Название</h3>
-                        <p class="product-price">Цена: 0 ₽</p>
-                    </div>
-                    <div class="product-meta">
-                        <span class="comments">💬 1</span>
-                        <span class="likes">👍 1</span>
-                        <span class="seller">👤 Автор</span>
-                    </div>
+                <div class="product-meta">
+                    <span class="comments">💬 1</span>
+                    <span class="likes">👍 1</span>
+                    <span class="seller">👤 Автор</span>
                 </div>
-            </a>
-        {% endfor %}
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}
+
+{% block items_content_block_3 %}
+    <div class="content-block-0">
+        <!-- Подробности о выбранном продукте -->
+        {% if product %}
+            <div class="product-form">
+                <h2>{{ product.name }}</h2>
+                <div class="product-image">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <p>Нет изображения</p>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <p>Категория: {{ product.category.name }}</p>
+                    <p>Цена: {{ product.price }} ₽</p>
+                    <p>Описание:</p>
+                    <p>{{ product.descriptions }}</p>
+                </div>
+                <div class="product-download">
+                    {% if product.model_files and product.price == 0.0 %}
+                        <a href="{{ product.model_files.url }}" download>Скачать файл модели</a>
+                    {% else %}
+                        <p>Чтобы использовать, необходимо его приобрести</p>
+                        <a href="{{ product.model_files.url }}" download>Скачать файл модели</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <p>Продукт не найден</p>
+        {% endif %}
+    </div>
 {% endblock %}

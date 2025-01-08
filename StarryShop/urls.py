@@ -1,11 +1,11 @@
 # StarryShop/urls.py
 from django.urls import path
 from .views import IndexView, MyTemplateView, AuthLoginView, AuthReginView, UserCartView, ItemSearchView, \
-    UserProfileView, UserOutlogView
+    UserProfileView, UserOutlogView, ItemDetailsView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='main'),               # Главная страница
-    path('catalog/<int:pk>/products/<int:pk2>', IndexView.as_view(), name='product'),               # Главная страница
+    path('catalog/<int:pk>/products/<int:pk2>', ItemDetailsView.as_view(), name='product'),               # Главная страница
     path('catalog/0/search/', ItemSearchView.as_view(), name='search'),               # Главная страница
     path('auth/login/', AuthLoginView.as_view(), name='login'),               # Главная страница
     path('auth/reg/', AuthReginView.as_view(), name='reg'),               # Главная страница
