@@ -4,6 +4,9 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 
+from StarryShop.ViewModels.CategoriesViewModelModule import CategoriesViewModel
+from StarryShop.ViewModels.ProductsViewModelModule import ProductsViewModel
+
 
 class User:
     def isAuthenticated(self):
@@ -25,15 +28,56 @@ class MyTemplateView(TemplateView):
 
 class IndexView(TemplateView):
     template_name = "pages/index.html"
+    CategoriesView = None
+    ProductsView = None
+    categories = None
+    products = None
 
     def get(self, request, *args, **kwargs):
+        self.initViewModel()
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        self.initViewModel()
         context = super().get_context_data(**kwargs)
         context['user'] = UserTest.isAuthenticated
+        context["categories"] = self.categories
+        context["products"] = self.products
         context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return context
+
+    def initViewModel(self):
+        self.CategoriesView = CategoriesViewModel()
+        self.ProductsView = ProductsViewModel()
+        self.categories = self.CategoriesView.get_categories()
+        self.products = self.ProductsView.get_products()
+
+
+class ItemDetailsView(TemplateView):
+    template_name = "pages/item_details.html"
+    CategoriesView = None
+    ProductsView = None
+    categories = None
+    products = None
+
+    def get(self, request, *args, **kwargs):
+        self.initViewModel()
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        self.initViewModel()
+        context = super().get_context_data(**kwargs)
+        context['user'] = UserTest.isAuthenticated
+        # context["categories"] = self.categories
+        context["products"] = self.products
+        context['list_test'] = [1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        return context
+
+    def initViewModel(self):
+        self.CategoriesView = CategoriesViewModel()
+        self.ProductsView = ProductsViewModel()
+        self.categories = self.CategoriesView.get_categories()
+        self.products = self.ProductsView.get_products()
 
 
 class ItemSearchView(TemplateView):

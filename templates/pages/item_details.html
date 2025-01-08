@@ -1,8 +1,8 @@
-<!-- app/templates/index.html -->
+<!-- app/templates/items_details.html -->
 {% extends 'content/items_content.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Детали продукта{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -10,8 +10,8 @@
 
 {% block filter_items_content_block %}{% endblock %}
 
-{#{% block items_content_block_1 %}{% endblock %}#}
-{% block items_content_block_2 %}{% endblock %}
+{% block items_content_block_1 %}{% endblock %}
+{#{% block items_content_block_2 %}{% endblock %}#}
 
 {#{% block header_block_2 %}{% endblock %}#}
 {% block header_block_3 %}{% endblock %}

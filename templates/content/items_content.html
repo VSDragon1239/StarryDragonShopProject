@@ -11,8 +11,8 @@
             <a href="{% url 'product' product.category.id product.id %}" class="product-item">
                 <div class="image-placeholder">
                     {% if product.image %}
-{#                        <img src="{{ product.image.url }}" alt="{{ product.name }}">#}
-                        <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+{#                        <img src="{% static 'images/items/item_test.png' %}" alt="{{ product.name }}">#}
                     {% else %}
                         <p>Нет изображения</p>
                     {% endif %}
